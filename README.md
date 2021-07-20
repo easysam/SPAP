@@ -1,4 +1,4 @@
-# Simultaneous-Demand-Prediction-and-Planning
+# Simultaneous Demand Prediction and Planning
 
 ## Dependencies
 Python packages: `Pytorch`, `scikit-learn`, `Pandas`, `Numpy`, `PyYAML`
