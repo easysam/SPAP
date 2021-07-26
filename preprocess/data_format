@@ -1,0 +1,65 @@
+code order
+
+(1). LOAD DATA
+###############################
+# {city}_demand.npy
+demand: [num_time, num_node, 1]
+
+# {city}_external.npy
+holiday: [num_time, 1]
+hour: [num_time, 1]
+day: [num_time, 1]
+weather: [num_time, 1]
+temperature: [num_time, 1]
+wind: [num_time, 1]
+air_quality: [num_time, 1]
+
+# static_{city}.npy
+poi_frequency: [num_node, 13]
+poi_num: [num_node, 13]
+poi_entropy: [num_node, 1]
+road: [num_node, 4]
+transportation: [num_node, 6]
+commerce: [num_node, 2]
+
+# matrix_{city}.npy
+poi: [num_node, num_node]
+road: [num_node, num_node]
+distance: [num_node, num_node]
+
+
+(2). GET AND STORE DATA
+###############################
+# {city}_{time_step}.h5
+
+x: [size, num_node, time_step]
+y: [size, num_node]
+
+holiday: [size, time_step, 1]
+hour: [size, time_step, 1]
+day: [size, time_step, 1]
+weather: [size, time_step, 1]
+temperature: [size, time_step, 1]
+wind: [size, time_step, 1]
+air_quality: [size, time_step, 1]
+
+poi_frequency: [size, num_node, 13]
+poi_num: [size, num_node, 13]
+poi_entropy: [size, num_node, 1]
+road: [size, num_node, 4]
+transportation: [size, num_node, 6]
+commerce: [size, num_node, 2]
+
+
+
+logic order
+###############################
+(E0). get data for {city} matrix -- [poi_matrix, road_matrix, distance_matrix]
+(E1). get data for {city} {time_step}
+    (D1). check if have cache data {city}_{time_step}.h5
+         (1).if N,
+              (1). load data for {city}_demand.h5, {city}_external.h5, {city}_static.h5
+              (2). get and store data for {city}_{time_step}.h5
+    (D2). read cache data
+(E2). make X_train, y_train, X_val, y_val, X_test, y_test, according to EXP
+(E3). make train_loader, val_loader, test_loader
